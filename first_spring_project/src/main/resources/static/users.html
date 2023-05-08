@@ -515,7 +515,7 @@
                 <div class="table-responsive">
                   <table
                     class="table table-bordered"
-                    id="users"
+                    id="users-table"
                     width="100%"
                     cellspacing="0"
                   >
@@ -528,7 +528,7 @@
                         <th>Actions</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <!-- <tbody>
                       <tr>
                         <td>1</td>
                         <td>A Cobra</td>
@@ -540,7 +540,7 @@
                           </a>
                         </td>
                       </tr>
-                    </tbody>
+                    </tbody> -->
                   </table>
                 </div>
               </div>
@@ -607,6 +607,21 @@
         </div>
       </div>
     </div>
+
+    <!-- Templates  -->
+    <template id="user-information">
+      <tr>
+        <td class="user_id">1</td>
+        <td class="user_name">A Cobra</td>
+        <td class="user_email">fake_email@gmail.com</td>
+        <td class="user_phone">123456789</td>
+        <td>
+          <a href="#" class="btn btn-danger btn-circle btn-sm">
+            <i class="fas fa-trash"></i>
+          </a>
+        </td>
+      </tr>
+    </template>
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>

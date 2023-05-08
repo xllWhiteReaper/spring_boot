@@ -6,14 +6,14 @@ public class User {
     private String email;
     private String phone;
     private String password;
-    private String id;
+    private Long id;
 
     public User(String name,
             String lastName,
             String email,
             String phone,
             String password,
-            String id) {
+            Long id) {
         this.name = name;
         this.lastName = lastName;
         this.email = email;
@@ -62,11 +62,11 @@ public class User {
         this.password = password;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

@@ -14,14 +14,14 @@ public class UserRepository {
                     "fake1@gmail.com",
                     "123456789",
                     "definitelyNotMyDefaultPass2022",
-                    "1"),
+                    1L),
             new User(
                     "xllWhiteReaper",
                     "github",
                     "fake2@gmail.com",
                     "987654321",
                     "definitelyNotMyDefaultPass",
-                    "2")
+                    2L)
     };
 
     public User[] getAllUsers() {
@@ -30,7 +30,7 @@ public class UserRepository {
 
     public User getUserById(String id) {
         for (User user : usersList) {
-            if (user.getId().equals(id)) {
+            if ((user.getId() + "").equals(id)) {
                 return user;
             }
         }

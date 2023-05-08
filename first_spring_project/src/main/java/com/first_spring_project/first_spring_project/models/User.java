@@ -6,17 +6,20 @@ public class User {
     private String email;
     private String phone;
     private String password;
+    private String id;
 
     public User(String name,
             String lastName,
             String email,
             String phone,
-            String password) {
+            String password,
+            String id) {
         this.name = name;
         this.lastName = lastName;
         this.email = email;
         this.phone = phone;
         this.password = password;
+        this.id = id;
     }
 
     public String getName() {
@@ -59,4 +62,11 @@ public class User {
         this.password = password;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }

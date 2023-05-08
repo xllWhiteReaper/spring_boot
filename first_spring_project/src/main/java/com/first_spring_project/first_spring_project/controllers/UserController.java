@@ -1,37 +1,27 @@
 package com.first_spring_project.first_spring_project.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.first_spring_project.first_spring_project.models.User;
+import com.first_spring_project.first_spring_project.repositories.UserRepository;
 
 @RestController()
 public class UserController {
 
-    @RequestMapping(value = "test")
-    public String test() {
-        return "<h2>This is a test</h2>";
+    @Autowired 
+    private UserRepository userRepository;
+
+    @RequestMapping(value = "users/{id}")
+    public User getUserById(@PathVariable String id) {
+        return userRepository.getUserById(id);
     }
 
     @RequestMapping(value = "users")
     public User[] getUsers() {
-        User[] users = {
-                new User(
-                        "cobra",
-                        "github",
-                        "fake1@gmail.com",
-                        "123456789",
-                        "definitelyNotMyDefaultPass2022"
-                ),
-                new User(
-                        "xllWhiteReaper",
-                        "github",
-                        "fake2@gmail.com",
-                        "987654321",
-                        "definitelyNotMyDefaultPass"
-                )
-        };
-        return users;
+        return userRepository.getAllUsers();
     }
 
     @RequestMapping(value = "fruits")

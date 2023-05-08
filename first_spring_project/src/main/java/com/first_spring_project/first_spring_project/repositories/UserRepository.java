@@ -1,5 +1,6 @@
 package com.first_spring_project.first_spring_project.repositories;
 
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Repository;
 
 import com.first_spring_project.first_spring_project.models.User;
@@ -34,5 +35,6 @@ public class UserRepository {
             }
         }
         return null;
+        // return new ClassPathResource("static/404.html");
     }
 }

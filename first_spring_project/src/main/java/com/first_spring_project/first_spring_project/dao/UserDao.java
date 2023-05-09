@@ -1,7 +1,9 @@
 package com.first_spring_project.first_spring_project.dao;
 
+import java.util.List;
+
 import com.first_spring_project.first_spring_project.models.User;
 
 public interface UserDao {
-    User[] getUsers();
+    List<User> getAllUsers();
 }

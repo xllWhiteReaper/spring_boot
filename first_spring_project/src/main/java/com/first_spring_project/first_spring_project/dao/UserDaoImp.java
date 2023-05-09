@@ -17,12 +17,18 @@ public class UserDaoImp implements UserDao {
     @PersistenceContext
     private EntityManager entityManager;
 
+    // @Override
+    // @Transactional
+    // public User[] getAllUsers() {
+    //     String query = "FROM User";
+    //     List<User> userList = entityManager.createQuery(query).getResultList();
+    //     return userList.toArray(new User[userList.size()]);
+    // }
+
     @Override
     @Transactional
-    public User[] getUsers() {
+    public List<User> getAllUsers() {
         String query = "FROM User";
-        List<User> userList = entityManager.createQuery(query).getResultList();
-        return userList.toArray(new User[userList.size()]);
+        return entityManager.createQuery(query).getResultList();
     }
-
 }

@@ -1,5 +1,10 @@
 package com.first_spring_project.first_spring_project.models;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "user")
 public class User {
     private String name;
     private String lastName;

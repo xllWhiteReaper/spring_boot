@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.first_spring_project.first_spring_project.dao.UserDaoImp;
+import com.first_spring_project.first_spring_project.dao.UserDao;
 import com.first_spring_project.first_spring_project.models.User;
 import com.first_spring_project.first_spring_project.repositories.UserRepository;
 
@@ -18,17 +18,17 @@ public class UserController {
     private UserRepository userRepository;
 
     @Autowired 
-    private UserDaoImp userDao;
+    private UserDao userDao;
 
     @RequestMapping(value = "users/{id}")
     public User getUserById(@PathVariable String id) {
-        return userRepository.getUserById(id);
+        // return userRepository.getUserById(id);
+        return userDao.getUserById(id);
     }
 
     @RequestMapping(value = "users")
     public List<User> getUsers() {
         // return userRepository.getAllUsers();
-        System.out.println("Getting users");
         return userDao.getAllUsers();
     }
 

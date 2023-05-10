@@ -41,6 +41,16 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    public User() {
+        this(
+                "",
+                "",
+                "",
+                "",
+                "",
+                1L);
+    }
+
     public User(String name,
             String lastName,
             String email,

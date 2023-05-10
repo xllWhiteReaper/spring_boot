@@ -6,4 +6,6 @@ import com.first_spring_project.first_spring_project.models.User;
 
 public interface UserDao {
     List<User> getAllUsers();
+
+    User getUserById(String id);
 }

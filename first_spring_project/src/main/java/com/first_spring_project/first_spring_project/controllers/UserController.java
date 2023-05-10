@@ -14,8 +14,8 @@ import com.first_spring_project.first_spring_project.repositories.UserRepository
 @RestController()
 public class UserController {
 
-    @Autowired 
-    private UserRepository userRepository;
+    // @Autowired 
+    // private UserRepository userRepository;
 
     @Autowired 
     private UserDao userDao;
@@ -30,6 +30,12 @@ public class UserController {
     public List<User> getUsers() {
         // return userRepository.getAllUsers();
         return userDao.getAllUsers();
+    }
+
+    @RequestMapping(value = "test")
+    public String test() {
+        // return userRepository.getAllUsers();
+        return userDao.test();
     }
 
     @RequestMapping(value = "fruits")

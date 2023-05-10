@@ -10,10 +10,10 @@ import lombok.Setter;
 @Entity
 @Table(name = "user")
 public class User {
-    @Id
     @Getter
     @Setter
     @Column(name = "id")
+    @Id
     private Long id;
 
     @Getter

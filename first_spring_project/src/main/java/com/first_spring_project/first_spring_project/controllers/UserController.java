@@ -12,12 +12,13 @@ import com.first_spring_project.first_spring_project.models.User;
 import com.first_spring_project.first_spring_project.repositories.UserRepository;
 
 @RestController()
+@RequestMapping("/api")
 public class UserController {
 
-    // @Autowired 
+    // @Autowired
     // private UserRepository userRepository;
 
-    @Autowired 
+    @Autowired
     private UserDao userDao;
 
     @RequestMapping(value = "users/{id}")

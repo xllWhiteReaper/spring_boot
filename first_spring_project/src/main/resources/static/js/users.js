@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:8080";
+const API_BASE_URL = "http://localhost:8080/api";
 const headers = {
   Accept: "application/json",
   "Content-Type": "application/json",

@@ -23,7 +23,7 @@ public class User {
 
     @Getter
     @Setter
-    @Column(name = "lastName")
+    @Column(name = "last_name")
     private String lastName;
 
     @Getter

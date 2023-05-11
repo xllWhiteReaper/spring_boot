@@ -9,7 +9,7 @@ import com.first_spring_project.first_spring_project.models.User;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-
+import jakarta.persistence.TypedQuery;
 
 @Repository
 @Transactional
@@ -38,19 +38,24 @@ public class UserDaoImp implements UserDao {
     @Override
     public List<User> getAllUsers() {
         String query = "From User";
-        return entityManager.createQuery(query).getResultList();
+        TypedQuery<User> typedQuery = entityManager.createQuery(query, User.class);
+        return typedQuery.getResultList();
     }
 
     @Override
     public User getUserById(String id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getUserById'");
+        for (User user : usersList) {
+            if ((user.getId() + "").equals(id)) {
+                return user;
+            }
+        }
+        return null;
     }
 
     @Override
     public String test() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'test'");
+        String query = "FROM User";
+        return query;
     }
 
     // @Override
@@ -64,24 +69,24 @@ public class UserDaoImp implements UserDao {
     // @Override
     // @Transactional
     // public List<User> getAllUsers() {
-    //     String query = "FROM User";
-    //     List<User> userList = entityManager.createQuery(query).getResultList();
-    //     return userList;
+    // String query = "FROM User";
+    // List<User> userList = entityManager.createQuery(query).getResultList();
+    // return userList;
     // }
 
     // @Transactional
     // public String test() {
-    //     String query = "FROM User";
-    //     return query;
+    // String query = "FROM User";
+    // return query;
     // }
 
     // @Transactional
     // public User getUserById(String id) {
-    //     for (User user : usersList) {
-    //         if ((user.getId() + "").equals(id)) {
-    //             return user;
-    //         }
-    //     }
-    //     return null;
+    // for (User user : usersList) {
+    // if ((user.getId() + "").equals(id)) {
+    // return user;
+    // }
+    // }
+    // return null;
     // }
 }

@@ -37,8 +37,9 @@ function fillTable(users) {
 }
 
 function removeUser(id) {
+  if (!confirm("Are you user you want to remove the user?")) return;
   fetch(`${API_BASE_URL}/users/${id}`, {
     method: "DELETE",
     headers,
-  })
+  });
 }

@@ -12,4 +12,6 @@ public interface UserDao {
     String test();
 
     void deleteUserById(Long id);
+
+    void createUser(User user);
 }

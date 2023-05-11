@@ -42,4 +42,9 @@ public class UserDaoImp implements UserDao {
         User foundUser = entityManager.find(User.class, id);
         return foundUser;
     }
+
+    @Override
+    public void createUser(User user) {
+        entityManager.merge(user);
+    }
 }

@@ -30,7 +30,15 @@ function fillTable(users) {
     ).innerText = `${user.name} ${user.lastName}`;
     rowCopy.querySelector(".user_email").innerText = user.email;
     rowCopy.querySelector(".user_phone").innerText = user.phone;
+    rowCopy.querySelector("a").onclick = () => removeUser(user.id);
     documentFragment.appendChild(rowCopy);
   });
   TABLE_REFERENCE.appendChild(documentFragment);
+}
+
+function removeUser(id) {
+  fetch(`${API_BASE_URL}/users/${id}`, {
+    method: "DELETE",
+    headers,
+  })
 }

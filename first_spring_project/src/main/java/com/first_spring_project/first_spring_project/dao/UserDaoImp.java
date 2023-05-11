@@ -18,23 +18,6 @@ public class UserDaoImp implements UserDao {
     @PersistenceContext
     EntityManager entityManager;
 
-    private User[] usersList = {
-            new User(
-                    "cobra",
-                    "github",
-                    "fake1@gmail.com",
-                    "123456789",
-                    "definitelyNotMyDefaultPass2022",
-                    1L),
-            new User(
-                    "xllWhiteReaper",
-                    "github",
-                    "fake2@gmail.com",
-                    "987654321",
-                    "definitelyNotMyDefaultPass",
-                    2L)
-    };
-
     @Override
     public List<User> getAllUsers() {
         String query = "From User";
@@ -43,50 +26,20 @@ public class UserDaoImp implements UserDao {
     }
 
     @Override
-    public User getUserById(String id) {
-        for (User user : usersList) {
-            if ((user.getId() + "").equals(id)) {
-                return user;
-            }
-        }
-        return null;
-    }
-
-    @Override
     public String test() {
         String query = "FROM User";
         return query;
     }
 
-    // @Override
-    // @Transactional
-    // public User[] getAllUsers() {
-    // String query = "FROM User";
-    // List<User> userList = entityManager.createQuery(query).getResultList();
-    // return userList.toArray(new User[userList.size()]);
-    // }
+    @Override
+    public void deleteUserById(Long id) {
+        entityManager.remove(getUserById(id));
+    }
 
-    // @Override
-    // @Transactional
-    // public List<User> getAllUsers() {
-    // String query = "FROM User";
-    // List<User> userList = entityManager.createQuery(query).getResultList();
-    // return userList;
-    // }
-
-    // @Transactional
-    // public String test() {
-    // String query = "FROM User";
-    // return query;
-    // }
-
-    // @Transactional
-    // public User getUserById(String id) {
-    // for (User user : usersList) {
-    // if ((user.getId() + "").equals(id)) {
-    // return user;
-    // }
-    // }
-    // return null;
-    // }
+    @Override
+    @Transactional
+    public User getUserById(Long id) {
+        User foundUser = entityManager.find(User.class, id);
+        return foundUser;
+    }
 }

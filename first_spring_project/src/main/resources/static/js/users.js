@@ -29,7 +29,9 @@ function fillTable(users) {
       ".user_name"
     ).innerText = `${user.name} ${user.lastName}`;
     rowCopy.querySelector(".user_email").innerText = user.email;
-    rowCopy.querySelector(".user_phone").innerText = user.phone;
+    rowCopy.querySelector(".user_phone").innerText =
+      // user.phone == null ? "NOT PROVIDED" : user.phone;
+      user.phone === "" ? "NOT PROVIDED" : user.phone;
     rowCopy.querySelector("a").onclick = () => removeUser(user.id);
     documentFragment.appendChild(rowCopy);
   });

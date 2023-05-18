@@ -4,7 +4,6 @@ const headers = {
   "Content-Type": "application/json",
 };
 const SUBMIT_BUTTON = document.querySelector("#submit-btn");
-console.log(SUBMIT_BUTTON);
 
 $(document).ready(function () {
   addButtonEvent();
@@ -34,7 +33,6 @@ function registerUser() {
     headers,
     body: JSON.stringify(data),
   });
-  console.log("SENT A PETITION");
 }
 
 function addButtonEvent() {

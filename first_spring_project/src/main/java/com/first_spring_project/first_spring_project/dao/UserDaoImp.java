@@ -49,4 +49,15 @@ public class UserDaoImp implements UserDao {
     public void createUser(User user) {
         entityManager.merge(user);
     }
+
+    @Override
+    @Transactional
+    public boolean verifyCredentials(User user) {
+        String query = "FROM User WHERE email = :email AND password = :password";
+        TypedQuery<User> typedQuery = entityManager.createQuery(query, User.class);
+        List<User> userList = typedQuery.setParameter("email", user.getEmail())
+                .setParameter("password", user.getPassword()).getResultList();
+                
+        return !userList.isEmpty();
+    }
 }

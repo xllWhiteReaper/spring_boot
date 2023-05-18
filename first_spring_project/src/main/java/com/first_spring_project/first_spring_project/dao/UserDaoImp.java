@@ -32,6 +32,7 @@ public class UserDaoImp implements UserDao {
     }
 
     @Override
+    @Transactional
     public void deleteUserById(Long id) {
         entityManager.remove(getUserById(id));
     }
@@ -44,6 +45,7 @@ public class UserDaoImp implements UserDao {
     }
 
     @Override
+    @Transactional
     public void createUser(User user) {
         entityManager.merge(user);
     }

@@ -4,8 +4,11 @@ const headers = {
   "Content-Type": "application/json",
 };
 const SUBMIT_BUTTON = document.querySelector("#submit-btn");
+console.log(SUBMIT_BUTTON);
 
-$(document).ready(function () {});
+$(document).ready(function () {
+  addButtonEvent();
+});
 
 function registerUser() {
   const name = document.getElementById("name").value,
@@ -14,29 +17,28 @@ function registerUser() {
     password = document.getElementById("password").value,
     repeatPassword = document.getElementById("repeatPassword").value;
 
-  console.log(name);
-  console.log(name);
-  console.log(lastName);
-  console.log(lastName);
-  console.log(email);
-  console.log(email);
-  console.log(password);
-  console.log(password);
-  console.log(repeatPassword);
-  console.log(repeatPassword);
-  
   if (password !== repeatPassword) {
     alert("Passwords don't match");
     return;
   }
-  const data = {};
+
+  const data = {
+    name,
+    lastName,
+    email,
+    password,
+  };
+
   fetch(`${API_BASE_URL}/users`, {
     method: "POST",
     headers,
     body: JSON.stringify(data),
   });
+  console.log("SENT A PETITION");
 }
 
-SUBMIT_BUTTON.addEventListener("click", ()=>{
-  registerUser();
-})
+function addButtonEvent() {
+  SUBMIT_BUTTON.addEventListener("click", () => {
+    registerUser();
+  });
+}

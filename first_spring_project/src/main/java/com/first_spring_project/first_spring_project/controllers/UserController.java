@@ -37,12 +37,6 @@ public class UserController {
     @RequestMapping(value = "users", method = RequestMethod.POST)
     public void createUser(@RequestBody User user) {
         userDao.createUser(user);
-        // userDao.deleteUserById(id);
-    }
-
-    @RequestMapping(value = "test")
-    public String test() {
-        return userDao.test();
     }
 
     @RequestMapping(value = "fruits")

@@ -9,7 +9,7 @@ $(document).ready(function () {
   addButtonEvent();
 });
 
-function login() {
+async function login() {
   const email = document.getElementById("email").value,
     password = document.getElementById("password").value;
 
@@ -19,12 +19,16 @@ function login() {
   };
 
   console.log(data);
-  
-  fetch(`${API_BASE_URL}/login`, {
+
+  const response = await fetch(`${API_BASE_URL}/login`, {
     method: "POST",
     headers,
     body: JSON.stringify(data),
-  });
+  }).then((res) => res.text());
+
+  response === "OK"
+    ? (window.location.href = "users.html")
+    : alert("Wrong credentials! Please try again.");
 }
 
 function addButtonEvent() {

@@ -7,6 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.first_spring_project.first_spring_project.models.User;
 
+import de.mkammerer.argon2.Argon2;
+import de.mkammerer.argon2.Argon2Factory;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
@@ -14,6 +16,10 @@ import jakarta.persistence.TypedQuery;
 @Repository
 @Transactional
 public class UserDaoImp implements UserDao {
+
+    final int ENCRYPTION_CYCLES = 1;
+    final int MEMORY = 1024;
+    final int NUMBER_OF_THREADS = 1;
 
     @PersistenceContext
     EntityManager entityManager;
@@ -47,6 +53,9 @@ public class UserDaoImp implements UserDao {
     @Override
     @Transactional
     public void createUser(User user) {
+        Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
+        String hashedPassword = argon2.hash(ENCRYPTION_CYCLES, MEMORY, NUMBER_OF_THREADS, user.getPassword());
+        user.setPassword(hashedPassword);
         entityManager.merge(user);
     }
 
@@ -57,7 +66,7 @@ public class UserDaoImp implements UserDao {
         TypedQuery<User> typedQuery = entityManager.createQuery(query, User.class);
         List<User> userList = typedQuery.setParameter("email", user.getEmail())
                 .setParameter("password", user.getPassword()).getResultList();
-                
+
         return !userList.isEmpty();
     }
 }

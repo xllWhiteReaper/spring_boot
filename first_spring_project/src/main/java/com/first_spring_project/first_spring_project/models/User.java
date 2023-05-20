@@ -1,7 +1,5 @@
 package com.first_spring_project.first_spring_project.models;
 
-import de.mkammerer.argon2.Argon2;
-import de.mkammerer.argon2.Argon2Factory;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -46,10 +44,6 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    final int ENCRYPTION_CYCLES = 1;
-    final int MEMORY = 1024;
-    final int NUMBER_OF_THREADS = 1;
-
     public User() {
         this(
                 "",
@@ -72,11 +66,5 @@ public class User {
         this.phone = phone;
         this.password = password;
         this.id = id;
-    }
-
-    public void encryptPassword() {
-        Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
-        String hashedPassword = argon2.hash(ENCRYPTION_CYCLES, MEMORY, NUMBER_OF_THREADS, password);
-        password = hashedPassword;
     }
 }

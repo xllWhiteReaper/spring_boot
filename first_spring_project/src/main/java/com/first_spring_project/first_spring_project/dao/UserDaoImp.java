@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.first_spring_project.first_spring_project.models.User;
+import com.first_spring_project.first_spring_project.utils.Encrypter;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -47,18 +48,16 @@ public class UserDaoImp implements UserDao {
     @Override
     @Transactional
     public void createUser(User user) {
-        user.encryptPassword();
+        Encrypter.encryptUserPass(user);
         entityManager.merge(user);
     }
 
     @Override
     @Transactional
     public boolean verifyCredentials(User user) {
-        String query = "FROM User WHERE email = :email AND password = :password";
+        String query = "FROM User WHERE email = :email";
         TypedQuery<User> typedQuery = entityManager.createQuery(query, User.class);
-        List<User> userList = typedQuery.setParameter("email", user.getEmail())
-                .setParameter("password", user.getPassword()).getResultList();
-
-        return !userList.isEmpty();
+        List<User> userList = typedQuery.setParameter("email", user.getEmail()).getResultList();
+        return !userList.isEmpty() && Encrypter.verify(userList.get(0), user);
     }
 }

@@ -22,7 +22,7 @@ public class AuthController {
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public String login(@RequestBody User user) {
 		User verifiedUser = userDao.getUserByCredentials(user);
-		String jwtToken = jwtUtil.create(String.valueOf(verifiedUser.getId()), verifiedUser.getEmail());
-		return verifiedUser != null ? jwtToken : "INCORRECT";
+		return verifiedUser != null ? jwtUtil.create(String.valueOf(verifiedUser.getId()), verifiedUser.getEmail())
+				: "INCORRECT";
 	}
 }

@@ -16,7 +16,7 @@ $(document).ready(async function () {
 async function getUsers() {
   return fetch(`${API_BASE_URL}/users`, {
     method: "GET",
-    headers: getHeaders(),
+    headers: getHeaders("authorization"),
   }).then((response) => response.json());
 }
 
@@ -39,7 +39,7 @@ function fillTable(users) {
 }
 
 function removeUser(id) {
-  if (!confirm("Are you user you want to remove the user?")) return;
+  if (!confirm("Are you user you want to remov e the user?")) return;
   fetch(`${API_BASE_URL}/users/${id}`, {
     method: "DELETE",
     headers: getHeaders("authorization"),

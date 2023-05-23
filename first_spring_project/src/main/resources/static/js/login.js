@@ -24,7 +24,6 @@ async function login() {
     headers: getHeaders(),
     body: JSON.stringify(data),
   }).then((res) => res.text());
-
   response !== "INCORRECT"
     ? ((window.location.href = "users.html"),
       localStorage.setItem(JWT_TOKEN_KEY_FOR_LOCAL_STORAGE, response),

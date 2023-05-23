@@ -1,3 +1,4 @@
+import { getHeaders } from "./get-headers.js";
 const API_BASE_URL = "http://localhost:8080/api";
 const headers = {
   Accept: "application/json",
@@ -15,7 +16,7 @@ $(document).ready(async function () {
 async function getUsers() {
   return fetch(`${API_BASE_URL}/users`, {
     method: "GET",
-    headers,
+    headers: getHeaders(),
   }).then((response) => response.json());
 }
 
@@ -42,6 +43,6 @@ function removeUser(id) {
   if (!confirm("Are you user you want to remove the user?")) return;
   fetch(`${API_BASE_URL}/users/${id}`, {
     method: "DELETE",
-    headers,
+    headers: getHeaders(),
   });
 }

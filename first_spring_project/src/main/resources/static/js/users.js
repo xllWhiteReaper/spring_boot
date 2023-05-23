@@ -31,7 +31,6 @@ function fillTable(users) {
     ).innerText = `${user.name} ${user.lastName}`;
     rowCopy.querySelector(".user_email").innerText = user.email;
     rowCopy.querySelector(".user_phone").innerText =
-      // user.phone == null ? "NOT PROVIDED" : user.phone;
       user.phone === "" ? "NOT PROVIDED" : user.phone;
     rowCopy.querySelector("a").onclick = () => removeUser(user.id);
     documentFragment.appendChild(rowCopy);
@@ -43,6 +42,6 @@ function removeUser(id) {
   if (!confirm("Are you user you want to remove the user?")) return;
   fetch(`${API_BASE_URL}/users/${id}`, {
     method: "DELETE",
-    headers: getHeaders(),
+    headers: getHeaders("authorization"),
   });
 }

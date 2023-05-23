@@ -1,11 +1,14 @@
 const JWT_TOKEN_KEY_FOR_LOCAL_STORAGE = "jwtToken";
 
-export function getHeaders() {
-  return {
-    Accept: "application/json",
-    "Content-Type": "application/json",
-    Authorization: getJwtToken(),
-  };
+const HEADERS = {
+  Accept: "application/json",
+  "Content-Type": "application/json",
+};
+
+export function getHeaders(headerType = "normal") {
+  return headerType === "authorization"
+    ? { ...HEADERS, Authorization: getJwtToken() }
+    : HEADERS;
 }
 
 function getJwtToken() {

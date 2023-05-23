@@ -1,8 +1,6 @@
+import { getHeaders } from "./get-headers.js";
+
 const API_BASE_URL = "http://localhost:8080/api";
-const headers = {
-  Accept: "application/json",
-  "Content-Type": "application/json",
-};
 const SUBMIT_BUTTON = document.querySelector("#submit-btn");
 
 $(document).ready(function () {
@@ -30,7 +28,7 @@ async function registerUser() {
 
   const response = await fetch(`${API_BASE_URL}/users`, {
     method: "POST",
-    headers,
+    headers: getHeaders(),
     body: JSON.stringify(data),
   });
 

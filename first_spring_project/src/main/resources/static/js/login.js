@@ -1,8 +1,6 @@
+import { getHeaders } from "./get-headers.js";
+
 const API_BASE_URL = "http://localhost:8080/api";
-export const headers = {
-  Accept: "application/json",
-  "Content-Type": "application/json",
-};
 const SUBMIT_BUTTON = document.querySelector("#submit-btn");
 const JWT_TOKEN_KEY_FOR_LOCAL_STORAGE = "jwtToken";
 
@@ -23,7 +21,7 @@ async function login() {
 
   const response = await fetch(`${API_BASE_URL}/login`, {
     method: "POST",
-    headers,
+    headers: getHeaders(),
     body: JSON.stringify(data),
   }).then((res) => res.text());
 

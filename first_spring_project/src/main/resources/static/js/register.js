@@ -9,7 +9,7 @@ $(document).ready(function () {
   addButtonEvent();
 });
 
-function registerUser() {
+async function registerUser() {
   const name = document.getElementById("name").value,
     lastName = document.getElementById("lastName").value,
     email = document.getElementById("email").value,
@@ -28,11 +28,16 @@ function registerUser() {
     password,
   };
 
-  fetch(`${API_BASE_URL}/users`, {
+  const response = await fetch(`${API_BASE_URL}/users`, {
     method: "POST",
     headers,
     body: JSON.stringify(data),
   });
+
+  if (response.status === 200) {
+    alert("User registered correctly");
+    // window.location.href = "login.html";
+  } else alert("Something went wrong, please try again");
 }
 
 function addButtonEvent() {

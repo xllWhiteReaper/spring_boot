@@ -4,6 +4,7 @@ const headers = {
   "Content-Type": "application/json",
 };
 const SUBMIT_BUTTON = document.querySelector("#submit-btn");
+const JWT_TOKEN_KEY_FOR_LOCAL_STORAGE = "jwtToken";
 
 $(document).ready(function () {
   addButtonEvent();
@@ -26,8 +27,10 @@ async function login() {
     body: JSON.stringify(data),
   }).then((res) => res.text());
 
-  response === "OK"
-    ? (window.location.href = "users.html")
+  response !== "INCORRECT"
+    ? ((window.location.href = "users.html"),
+      localStorage.setItem(JWT_TOKEN_KEY_FOR_LOCAL_STORAGE, response),
+      localStorage.setItem("email", data.email))
     : alert("Wrong credentials! Please try again.");
 }
 

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.first_spring_project.first_spring_project.dao.UserDao;
 import com.first_spring_project.first_spring_project.models.User;
+import com.first_spring_project.first_spring_project.utils.JWTUtil;
 
 @RestController()
 @RequestMapping("/api")
@@ -15,8 +16,13 @@ public class AuthController {
 	@Autowired
 	UserDao userDao;
 
+	@Autowired
+	JWTUtil jwtUtil;
+
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public String login(@RequestBody User user) {
-		return userDao.verifyCredentials(user) ? "OK" : "INCORRECT";
+		User verifiedUser = userDao.getUserByCredentials(user);
+		String jwtToken = jwtUtil.create(String.valueOf(verifiedUser.getId()), verifiedUser.getEmail());
+		return verifiedUser != null ? jwtToken : "INCORRECT";
 	}
 }

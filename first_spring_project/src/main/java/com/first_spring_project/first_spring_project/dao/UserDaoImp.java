@@ -54,10 +54,10 @@ public class UserDaoImp implements UserDao {
 
     @Override
     @Transactional
-    public boolean verifyCredentials(User user) {
+    public User getUserByCredentials(User user) {
         String query = "FROM User WHERE email = :email";
         TypedQuery<User> typedQuery = entityManager.createQuery(query, User.class);
         List<User> userList = typedQuery.setParameter("email", user.getEmail()).getResultList();
-        return !userList.isEmpty() && Encrypter.verify(userList.get(0), user);
+        return !userList.isEmpty() && Encrypter.verify(userList.get(0), user) ? userList.get(0) : null;
     }
 }

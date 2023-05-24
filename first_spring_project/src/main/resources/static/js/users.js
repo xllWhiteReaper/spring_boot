@@ -5,12 +5,14 @@ const headers = {
   "Content-Type": "application/json",
 };
 const TABLE_REFERENCE = document.querySelector("#users-table");
+const EMAIL_KEY_FOR_LOCAL_STORAGE = "email";
 
 // Call the dataTables jQuery plugin
 $(document).ready(async function () {
   const users = await getUsers();
   fillTable(users);
   $("#users-table").DataTable();
+  getAndFillUserEmailFromLocalStorage();
 });
 
 async function getUsers() {
@@ -39,9 +41,14 @@ function fillTable(users) {
 }
 
 function removeUser(id) {
-  if (!confirm("Are you user you want to remov e the user?")) return;
+  if (!confirm("Are you user you want to remove the user?")) return;
   fetch(`${API_BASE_URL}/users/${id}`, {
     method: "DELETE",
     headers: getHeaders("authorization"),
   });
+}
+
+function getAndFillUserEmailFromLocalStorage() {
+  document.getElementById("user-email").innerText =
+    localStorage.getItem(EMAIL_KEY_FOR_LOCAL_STORAGE) ?? "Log In";
 }

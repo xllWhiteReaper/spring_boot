@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 
+import org.springframework.web.bind.annotation.RestController;
 import com.first_spring_project.first_spring_project.dao.UserDao;
 import com.first_spring_project.first_spring_project.models.User;
 import com.first_spring_project.first_spring_project.utils.JWTUtil;
@@ -27,12 +27,7 @@ public class UserController {
 
     @RequestMapping(value = "users", method = RequestMethod.GET)
     public List<User> getAllUsers(@RequestHeader(value = "Authorization") String jwtToken) {
-        try {
-            String userId = jwtUtil.getKey(jwtToken);
-            return userId != null ? userDao.getAllUsers() : new ArrayList<>();
-        } catch (Exception e) {
-            return new ArrayList<>();
-        }
+        return validateToken(jwtToken) ? userDao.getAllUsers() : new ArrayList<>();
     }
 
     @RequestMapping(value = "users/{id}", method = RequestMethod.GET)
@@ -41,8 +36,10 @@ public class UserController {
     }
 
     @RequestMapping(value = "users/{id}", method = RequestMethod.DELETE)
-    public void deleteUserById(@PathVariable Long id) {
-        userDao.deleteUserById(id);
+    public void deleteUserById(@PathVariable Long id, @RequestHeader(value = "Authorization") String jwtToken) {
+        if (validateToken(jwtToken)) {
+            userDao.deleteUserById(id);
+        }
     }
 
     @RequestMapping(value = "users", method = RequestMethod.POST)
@@ -50,9 +47,12 @@ public class UserController {
         userDao.createUser(user);
     }
 
-    @RequestMapping(value = "fruits")
-    public String[] getFruits() {
-        final String[] fruits = { "Apple", "Banana", "Tangerine" };
-        return fruits;
+    private boolean validateToken(String jwtToken) {
+        try {
+            String userId = jwtUtil.getKey(jwtToken);
+            return userId != null ? true : false;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

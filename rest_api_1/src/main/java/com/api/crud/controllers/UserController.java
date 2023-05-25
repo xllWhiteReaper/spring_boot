@@ -19,9 +19,19 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @RequestMapping(value = "test")
+    public String test() {
+        return "this is a test";
+    }
+
     @RequestMapping(method = RequestMethod.GET)
     public ArrayList<User> getUsers() {
         return userService.getUsers();
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public Optional<User> getUserById(@PathVariable("id") Long id) {
+        return userService.getUserById(id);
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -29,8 +39,14 @@ public class UserController {
         return userService.createUser(user);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Optional<User> getUserById(@PathVariable Long id) {
-        return userService.getUserById(id);
+    @RequestMapping(method = RequestMethod.PUT)
+    public User updateUserById(@RequestBody User user) {
+        return userService.updateUserById(user);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public String deleteUserById(@PathVariable("id") Long id) {
+        return userService.deleteUserById(id) ? "User with id: " + id + " was successfully deleted"
+                : "There was an unexpected error, please try again";
     }
 }

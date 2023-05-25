@@ -25,4 +25,24 @@ public class UserService {
     public Optional<User> getUserById(Long id) {
         return userRepository.findById(id);
     }
+
+    public User updateUserById(User userToUpdate) {
+        User user = userRepository.findById(userToUpdate.getId()).get();
+        if (user != null) {
+            user.setFirstName(userToUpdate.getFirstName());
+            user.setLastName(userToUpdate.getEmail());
+            user.setEmail(userToUpdate.getEmail());
+            // userRepository.save(user);
+        }
+        return user;
+    }
+
+    public boolean deleteUserById(Long id) {
+        try {
+            userRepository.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

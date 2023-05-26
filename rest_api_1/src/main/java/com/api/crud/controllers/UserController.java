@@ -19,11 +19,6 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @RequestMapping(value = "test")
-    public String test() {
-        return "this is a test";
-    }
-
     @RequestMapping(method = RequestMethod.GET)
     public ArrayList<User> getUsers() {
         return userService.getUsers();

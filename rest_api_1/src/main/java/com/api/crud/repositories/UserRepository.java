@@ -7,5 +7,4 @@ import com.api.crud.models.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-
 }

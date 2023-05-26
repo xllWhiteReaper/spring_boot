@@ -5,9 +5,9 @@ DROP TABLE IF EXISTS `user`;
 
 CREATE TABLE user(
 	id BIGINT PRIMARY KEY AUTO_INCREMENT,
-    first_name VARCHAR(50),
-    last_name VARCHAR(50),
-    email VARCHAR(255)
+  first_name VARCHAR(50),
+  last_name VARCHAR(50),
+  email VARCHAR(255)
 );
 
 INSERT INTO `user` (`id`, `first_name`, `last_name`, `email`) VALUES 

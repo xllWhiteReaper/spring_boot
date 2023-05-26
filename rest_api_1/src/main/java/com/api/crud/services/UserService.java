@@ -30,9 +30,9 @@ public class UserService {
         User user = userRepository.findById(userToUpdate.getId()).get();
         if (user != null) {
             user.setFirstName(userToUpdate.getFirstName());
-            user.setLastName(userToUpdate.getEmail());
+            user.setLastName(userToUpdate.getLastName());
             user.setEmail(userToUpdate.getEmail());
-            // userRepository.save(user);
+            userRepository.save(user);
         }
         return user;
     }

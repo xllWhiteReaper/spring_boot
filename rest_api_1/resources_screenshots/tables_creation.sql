@@ -1,8 +1,10 @@
 -- CREATE DATABASE user;
 USE `user`;
 
+DROP TABLE IF EXISTS `user`;
+
 CREATE TABLE user(
-	id BIGINT PRIMARY KEY,
+	id BIGINT PRIMARY KEY AUTO_INCREMENT,
     first_name VARCHAR(50),
     last_name VARCHAR(50),
     email VARCHAR(255)

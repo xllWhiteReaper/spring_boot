@@ -1,4 +1,4 @@
-package com.xllwhitereaper.rest_api_test;
+package com.xllwhitereaper.rest_api_test.non_api_related;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.xllwhitereaper.rest_api_test.utils.Calculator;
+import com.xllwhitereaper.rest_api_test.utils.non_api_related.Calculator;
 
 public class CalculatorTest {
     Calculator calculator;

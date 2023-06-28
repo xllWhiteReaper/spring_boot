@@ -1,4 +1,4 @@
-package com.xllwhitereaper.rest_api_test.utils;
+package com.xllwhitereaper.rest_api_test.utils.non_api_related;
 
 public class Calculator {
     public int multiply(int... integersList) {

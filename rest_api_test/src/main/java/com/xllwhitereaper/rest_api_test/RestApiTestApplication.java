@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class RestApiTestApplication {
 
 	public static void main(String[] args) {
+		System.out.println("Running up");
 		SpringApplication.run(RestApiTestApplication.class, args);
 	}
-
 }

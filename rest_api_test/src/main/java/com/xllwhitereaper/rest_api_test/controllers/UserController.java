@@ -18,7 +18,7 @@ import com.xllwhitereaper.rest_api_test.repositories.UserRepository;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping(name = "api/users")
+@RequestMapping(path = "/api/users")
 public class UserController {
     @Autowired
     private UserRepository userRepository;

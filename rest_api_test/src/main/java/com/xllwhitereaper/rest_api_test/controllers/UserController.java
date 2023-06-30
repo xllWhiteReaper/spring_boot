@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,7 +38,7 @@ public class UserController {
         return ResponseEntity.notFound().build();
     }
 
-    @PostMapping
+    @PutMapping
     public ResponseEntity<User> updateUser(@RequestBody @Valid User user) {
         if (user == null || user.getId() == null) {
             return ResponseEntity.unprocessableEntity().build();

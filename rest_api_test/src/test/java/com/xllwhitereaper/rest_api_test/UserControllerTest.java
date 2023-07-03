@@ -73,12 +73,12 @@ public class UserControllerTest {
         public void shouldGetUserByIdIfFound() throws Exception {
                 mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
 
-                long bookId = 1;
+                long userId = 1;
                 Optional<User> foundUser = Optional.of(USERS[0]);
 
-                Mockito.when(userRepository.findById(bookId)).thenReturn(foundUser);
+                Mockito.when(userRepository.findById(userId)).thenReturn(foundUser);
 
-                mockMvc.perform(MockMvcRequestBuilders.get("/api/users/" + bookId)
+                mockMvc.perform(MockMvcRequestBuilders.get("/api/users/" + userId)
                                 .contentType(MediaType.APPLICATION_JSON))
                                 .andExpect(status().isOk())
                                 .andExpect((MockMvcResultMatchers.jsonPath("$.name", is(foundUser.get().getName()))));
@@ -88,11 +88,11 @@ public class UserControllerTest {
         public void shouldReturnANotFoundWhenNotExistingUserWithSuchIdWhenGettingUserById() throws Exception {
                 mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
 
-                long bookId = 4;
+                long userId = 4;
 
-                Mockito.when(userRepository.findById(bookId)).thenReturn(Optional.ofNullable(null));
+                Mockito.when(userRepository.findById(userId)).thenReturn(Optional.ofNullable(null));
 
-                mockMvc.perform(MockMvcRequestBuilders.get("/api/users/" + bookId)
+                mockMvc.perform(MockMvcRequestBuilders.get("/api/users/" + userId)
                                 .contentType(MediaType.APPLICATION_JSON))
                                 .andExpect(status().isNotFound());
         }

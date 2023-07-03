@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -40,7 +41,7 @@ public class UserController {
 
     @PutMapping
     public ResponseEntity<User> updateUser(@RequestBody @Valid User user) {
-        if (user == null || user.getId() == null) {
+        if (user.getId() == null) {
             return ResponseEntity.unprocessableEntity().build();
         }
         Optional<User> optionalUser = userRepository.findById(user.getId());
@@ -49,5 +50,16 @@ public class UserController {
         }
         userRepository.save(user);
         return ResponseEntity.ok(user);
+    }
+
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<User> deleteUserById(@PathVariable("id") Long id) {
+        Optional<User> optionalUser = userRepository.findById(id);
+        if (optionalUser.isPresent()) {
+            User foundUser = optionalUser.get();
+            userRepository.delete(foundUser);
+            return ResponseEntity.ok(foundUser);
+        }
+        return ResponseEntity.notFound().build();
     }
 }

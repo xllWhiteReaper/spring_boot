@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:prostgresql://localhost:5432/jwt_security
+    url: jdbc:postgresql://localhost:5432/jwt_security
     username: admin
     password: safePass
     driver-class-name: org.postgresql.Driver

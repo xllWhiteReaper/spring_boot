@@ -1,5 +1,9 @@
-package main.java.com.xllWhiteReaper.security_v2.repositories;
+package com.xllWhiteReaper.security_v2.repositories;
 
-public interface ProductRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.xllWhiteReaper.security_v2.models.Product;
+
+public interface ProductRepository extends JpaRepository<Product, Long> {
 
 }

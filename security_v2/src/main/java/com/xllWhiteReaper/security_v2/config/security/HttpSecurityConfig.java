@@ -9,6 +9,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFilter;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.xllWhiteReaper.security_v2.utils.Permission;
 
@@ -17,10 +19,10 @@ import com.xllWhiteReaper.security_v2.utils.Permission;
 public class HttpSecurityConfig {
 
         // @Autowired
-        // private HttpSecurity httpSec;
+        // private AuthenticationFilter authenticationFilter;
 
         @Autowired
-        AuthenticationProvider authenticationProvider; // Dao authentication provider
+        private AuthenticationProvider authenticationProvider; // Dao authentication provider
 
         @Bean
         public SecurityFilterChain securityFilterChain(HttpSecurity httpSec) throws Exception {
@@ -41,25 +43,25 @@ public class HttpSecurityConfig {
                                                                                                          // independent
                                                                                                          // of others
                                 .authenticationProvider(authenticationProvider)
+                                // .addFilterBefore(authenticationFilter,
+                                // UsernamePasswordAuthenticationFilter.class)
                                 .authorizeHttpRequests(authConfig -> {
-                                        // // public ones
-                                        // authConfig.requestMatchers(HttpMethod.POST, "/auth/login").permitAll(); //
-                                        // login
-                                        // // must
-                                        // // not
-                                        // // be
-                                        // // secured
-                                        // authConfig.requestMatchers("/error").permitAll();
+                                        // public ones
+                                        authConfig.requestMatchers(HttpMethod.POST, "/auth/login").permitAll(); // login
+                                                                                                                // must
+                                                                                                                // not
+                                                                                                                // be
+                                                                                                                // secured
+                                        authConfig.requestMatchers("/error").permitAll();
 
-                                        // // private ones
-                                        // authConfig.requestMatchers(HttpMethod.GET, "/products")
-                                        // .hasAuthority(Permission.READ_ALL_PRODUCTS.name());
-                                        // authConfig.requestMatchers(HttpMethod.POST, "/products")
-                                        // .hasAuthority(Permission.SAVE_ONE_PRODUCT.name());
+                                        // private ones
+                                        authConfig.requestMatchers(HttpMethod.GET, "/products")
+                                                        .hasAuthority(Permission.READ_ALL_PRODUCTS.name());
+                                        authConfig.requestMatchers(HttpMethod.POST, "/products")
+                                                        .hasAuthority(Permission.SAVE_ONE_PRODUCT.name());
 
-                                        // // all the other ones
-                                        // authConfig.anyRequest().denyAll();
-                                        authConfig.anyRequest().permitAll();
+                                        // all the other ones
+                                        authConfig.anyRequest().denyAll();
                                 })
                                 .build();
         }

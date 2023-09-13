@@ -32,7 +32,7 @@ public class AuthenticationService {
                 authenticationRequest.getUsername(),
                 authenticationRequest.getPassword());
 
-        authenticationManager.authenticate(authToken);
+        authenticationManager.authenticate(authToken); // bad error handling, it causes a 403 code when it was a 404
         User user = userRepository.findByUsername(authenticationRequest.getUsername())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -44,6 +44,7 @@ public class AuthenticationService {
     private Map<String, Object> getExtraClaims(User user) {
         return new HashMap<String, Object>(Map.of(
                 "name", user.getName(),
-                "role", user.getRole().name()));
+                "role", user.getRole().name(),
+                "permission", user.getAuthorities()));
     }
 }

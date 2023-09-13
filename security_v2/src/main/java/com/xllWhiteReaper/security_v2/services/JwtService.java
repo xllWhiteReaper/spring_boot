@@ -9,7 +9,10 @@ import org.springframework.stereotype.Service;
 
 import com.xllWhiteReaper.security_v2.models.User;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Header;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
@@ -43,4 +46,17 @@ public class JwtService {
         return Keys.hmacShaKeyFor(SIGNING_KEY_BYTES);
     }
 
+    public String extractUsername(String jwtToken) {
+        // Validates 3 things: jwtToken has adequate format and Stringified json as a
+        // serialized base 64, non expired, and signing key
+        return extractBodyClaims(jwtToken).getSubject();
+    }
+
+    public Jws<Claims> extractClaims(String jwtToken) {
+        return Jwts.parserBuilder().setSigningKey(getKey()).build().parseClaimsJws(jwtToken);
+    }
+
+    public Claims extractBodyClaims(String jwtToken) {
+        return extractClaims(jwtToken).getBody();
+    }
 }

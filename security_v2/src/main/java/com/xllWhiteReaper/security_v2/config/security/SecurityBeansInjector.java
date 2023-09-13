@@ -1,6 +1,5 @@
 package com.xllWhiteReaper.security_v2.config.security;
 
-import org.hibernate.annotations.Bag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;

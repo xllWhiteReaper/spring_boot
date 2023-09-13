@@ -9,17 +9,17 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AuthenticationFilter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.xllWhiteReaper.security_v2.config.security.filter.JwtAuthenticationFilter;
 import com.xllWhiteReaper.security_v2.utils.Permission;
 
 @Configuration
 @EnableWebSecurity
 public class HttpSecurityConfig {
 
-        // @Autowired
-        // private AuthenticationFilter authenticationFilter;
+        @Autowired
+        private JwtAuthenticationFilter jwtAuthenticationFilter;
 
         @Autowired
         private AuthenticationProvider authenticationProvider; // Dao authentication provider
@@ -43,8 +43,8 @@ public class HttpSecurityConfig {
                                                                                                          // independent
                                                                                                          // of others
                                 .authenticationProvider(authenticationProvider)
-                                // .addFilterBefore(authenticationFilter,
-                                // UsernamePasswordAuthenticationFilter.class)
+                                .addFilterBefore(jwtAuthenticationFilter,
+                                                UsernamePasswordAuthenticationFilter.class)
                                 .authorizeHttpRequests(authConfig -> {
                                         // public ones
                                         authConfig.requestMatchers(HttpMethod.POST, "/auth/login").permitAll(); // login

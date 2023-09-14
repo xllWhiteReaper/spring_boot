@@ -2,6 +2,7 @@ package com.xllWhiteReaper.security_v2.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,7 @@ public class AuthenticationController {
     @Autowired
     private AuthenticationService authenticationService;
 
+    @PreAuthorize("permitAll")
     @PostMapping(path = "/login")
     public ResponseEntity<AuthenticationResponse> login(
             @RequestBody @Valid AuthenticationRequest authenticationRequest) {

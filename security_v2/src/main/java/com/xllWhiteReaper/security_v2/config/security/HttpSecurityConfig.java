@@ -5,8 +5,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -16,6 +19,7 @@ import com.xllWhiteReaper.security_v2.utils.Permission;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 public class HttpSecurityConfig {
 
         @Autowired
@@ -45,24 +49,28 @@ public class HttpSecurityConfig {
                                 .authenticationProvider(authenticationProvider)
                                 .addFilterBefore(jwtAuthenticationFilter,
                                                 UsernamePasswordAuthenticationFilter.class)
-                                .authorizeHttpRequests(authConfig -> {
-                                        // public ones
-                                        authConfig.requestMatchers(HttpMethod.POST, "/auth/login").permitAll(); // login
-                                                                                                                // must
-                                                                                                                // not
-                                                                                                                // be
-                                                                                                                // secured
-                                        authConfig.requestMatchers("/error").permitAll();
-
-                                        // private ones
-                                        authConfig.requestMatchers(HttpMethod.GET, "/products")
-                                                        .hasAuthority(Permission.READ_ALL_PRODUCTS.name());
-                                        authConfig.requestMatchers(HttpMethod.POST, "/products")
-                                                        .hasAuthority(Permission.SAVE_ONE_PRODUCT.name());
-
-                                        // all the other ones
-                                        authConfig.anyRequest().denyAll();
-                                })
+                                // .authorizeHttpRequests(requestMatchersBuilder())
                                 .build();
+        }
+
+        private Customizer<AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry> requestMatchersBuilder() {
+                return authConfig -> {
+                        // public ones
+                        authConfig.requestMatchers(HttpMethod.POST, "/auth/login").permitAll(); // login
+                                                                                                // must
+                                                                                                // not
+                                                                                                // be
+                                                                                                // secured
+                        authConfig.requestMatchers("/error").permitAll();
+
+                        // private ones
+                        authConfig.requestMatchers(HttpMethod.GET, "/products")
+                                        .hasAuthority(Permission.READ_ALL_PRODUCTS.name());
+                        authConfig.requestMatchers(HttpMethod.POST, "/products")
+                                        .hasAuthority(Permission.SAVE_ONE_PRODUCT.name());
+
+                        // all the other ones
+                        authConfig.anyRequest().denyAll();
+                };
         }
 }

@@ -26,7 +26,7 @@ import jakarta.validation.Valid;
 import com.xllWhiteReaper.security_v2.models.Product;
 
 @RestController
-@RequestMapping(path = "/products")
+@RequestMapping(path = "/api/products")
 public class ProductController {
     @Autowired
     private ProductRepository productRepository;

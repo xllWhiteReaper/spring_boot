@@ -15,6 +15,7 @@ import com.xllWhiteReaper.security_v2.repositories.UserRepository;
 
 @Service
 public class AuthenticationService {
+
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -25,8 +26,6 @@ public class AuthenticationService {
     private JwtService jwtService;
 
     public AuthenticationResponse login(AuthenticationRequest authenticationRequest) {
-
-        System.out.println("Inside login from authentication service");
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                 authenticationRequest.getUsername(),
                 authenticationRequest.getPassword());
@@ -36,7 +35,6 @@ public class AuthenticationService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         String jwt = jwtService.getToken(user, getExtraClaims(user));
-        System.out.println("Inside login from authentication service");
         return new AuthenticationResponse(jwt);
     }
 

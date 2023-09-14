@@ -22,6 +22,7 @@ public class JwtService {
 
     @Value("${security.jwt.signing-key}")
     private String SIGNING_KEY;
+
     @Value("${security.jwt.token-duration-in-minutes}")
     private long TOKEN_DURATION_IN_MINUTES;
 
@@ -30,9 +31,7 @@ public class JwtService {
         Date currentDate = new Date(currentMilliseconds);
         Date expirationDate = new Date(currentMilliseconds + TOKEN_DURATION_IN_MINUTES * 60 * 1000);
         return Jwts.builder().setClaims(extraClaims) // We start with extra claims because we might accidentally
-                                                     // override
-                // other claims
-
+                                                     // override other claims
                 .setSubject(user.getUsername())
                 .setIssuedAt(currentDate)
                 .setExpiration(expirationDate)

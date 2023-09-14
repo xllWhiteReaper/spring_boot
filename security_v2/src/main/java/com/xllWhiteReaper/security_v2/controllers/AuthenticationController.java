@@ -24,11 +24,7 @@ public class AuthenticationController {
     @PostMapping(path = "/login")
     public ResponseEntity<AuthenticationResponse> login(
             @RequestBody @Valid AuthenticationRequest authenticationRequest) {
-        System.out.println("Logging in");
         AuthenticationResponse jwtDto = authenticationService.login(authenticationRequest);
-        System.out.println("jwtDto");
-        System.out.println(jwtDto);
-
         return ResponseEntity.ok(jwtDto);
     }
 }

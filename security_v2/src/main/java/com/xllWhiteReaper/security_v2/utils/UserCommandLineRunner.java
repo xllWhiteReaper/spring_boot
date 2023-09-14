@@ -1,7 +1,5 @@
 package com.xllWhiteReaper.security_v2.utils;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -38,12 +36,5 @@ public class UserCommandLineRunner implements CommandLineRunner {
         user2.setRole(Role.CUSTOMER);
         user2.setUsername("username2");
         userRepository.save(user2);
-
-        System.out.println("\n\n\n All Users:\n\n\n");
-        List<User> users = userRepository.findAll();
-        for (User user : users) {
-            System.out.println("User: " + user.getName());
-            System.out.println("Password: " + user.getPassword());
-        }
     }
 }

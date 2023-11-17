@@ -18,47 +18,64 @@ The following technologies were used in this project:
 
 1. Clone the repository to your local machine using the following command:
 
-```
-git clone https://github.com/xllWhiteReaper/spring_boot/tree/develop
+   ```
+   git clone https://github.com/xllWhiteReaper/spring_boot
+   ```
 
-```
+2. Navigate to the newly created folder:
 
-2. Switch branches by using the following command:
+   ```
+   cd spring_boot
+   ```
 
-```
-git checkout develop
-```
+3. Switch to the 'develop' branch:
 
-3. Navigate to the project directory:
+   ```
+   git checkout develop
+   ```
 
-```
-cd rest_api_test
-```
+4. Navigate to the project directory:
 
-4. Open the project with your favorite IDE (Optional)
-5. You might want to uncomment the application properties and edit them by using your database parameters
-6. Build the application using the following command:
+   ```
+   cd rest_api_test
+   ```
 
-```
-./mvnw clean package
+5. (Optional) Open the project with your favorite IDE.
 
-```
+6. Create a MySQL database
 
-6. If step 5 didn't work, you might need to install Maven locally
-7. Start the application using the following command:
+7. Replace the file under `src/main/resources/application.properties`file with with the following database parameters:
 
-```
-java -jar target/rest_api_test.jar
-```
+   ```
+   spring.datasource.url=jdbc:mysql://localhost/<your_db_name>?useSSL=false
+   spring.datasource.dbname=<your_db_name>
+   spring.datasource.username=<your_db_username>
+   spring.datasource.password=<your_db_password>
+   ```
+
+8. Build the application using the following command:
+
+   ```
+   ./mvnw clean package
+
+   ```
+
+9. If step 5 didn't work, you might need to install Maven locally
+
+10. Start the application using the following command:
+
+    ```
+    ./mvnw spring-boot:run
+    ```
 
 ## Running tests
 
 1. Navigate to the project directory.
 2. Run the following command to execute the tests:
 
-```
-./mvnw test
-```
+   ```
+   ./mvnw test
+   ```
 
 ## Conclusions
 

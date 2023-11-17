@@ -44,7 +44,7 @@ The following technologies were used in this project:
 
 6. Create a MySQL database
 
-7. Replace the file under `src/main/resources/application.properties`file with with the following database parameters:
+7. Replace the file under `src/main/resources/application.properties` file with with the following database parameters:
 
    ```
    spring.datasource.url=jdbc:mysql://localhost/<your_db_name>?useSSL=false
@@ -57,7 +57,6 @@ The following technologies were used in this project:
 
    ```
    ./mvnw clean package
-
    ```
 
 9. If step 5 didn't work, you might need to install Maven locally
